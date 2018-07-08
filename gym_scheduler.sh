@@ -24,4 +24,4 @@ response_location=$(curl -i -XPOST "https://cbcfitness.gymmasteronline.com/porta
 
 booking_id=$(echo $response_location | sed -e 's/.*\/portal\/payment\/tacs\/\(.*\)?session.*/\1/')
 
-curl -i  https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
+curl -XPOST https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
