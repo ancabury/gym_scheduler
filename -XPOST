@@ -1,0 +1,12 @@
+HTTP/1.1 302 FOUND
+Date: Sun, 08 Jul 2018 15:20:00 GMT
+Server: Apache/2.4.25 (Debian)
+Content-Type: text/html; charset=utf-8
+Content-Length: 519
+Location: https://cbcfitness.gymmasteronline.com/portal/account/?session=.eJyrVspNzU1KLYpPzs8tSMyrzExRsjLSUSotTi0CMc1MjM10lHIL4nPy09NTU-Iz85SsSopKU3WUskqLSyCCMLFaAAKhGxQ.DiO9IA.exOiIDbhbD89TNpmCErzTvDvkqo
+X-RateLimit-Remaining: 158
+X-RateLimit-Limit: 160
+X-RateLimit-Reset: 1531063320
+Set-Cookie: session=c8651a8f-6ed4-40d4-848c-ae91540cc50f; Path=/
+Vary: User-Agent
+
