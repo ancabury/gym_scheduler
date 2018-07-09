@@ -1,0 +1,50 @@
+.jumbotron
+  .card.w-75.mx-auto
+    %img.card-img-top{:alt => "Card image cap", :src => "..."}/
+    .card-body
+      %h5.card-title.text-center My account
+      .card-text
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+          = devise_error_messages!
+          .field
+            = f.label :name
+            = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'
+
+          .field
+            = f.label :email
+            = f.email_field :email, autocomplete: "email", class: 'form-control'
+
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %div
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          .field
+            = f.label :password
+            %i
+              (leave blank if you don't want to change it)
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+
+            - if @minimum_password_length
+              %small.form-text.text-muted
+                = @minimum_password_length
+                characters minimum
+
+          .field
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+
+          .field
+            = f.label :current_password
+            %i
+              (we need your current password to confirm your changes)
+            = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+
+          %br
+          .actions
+            = f.submit "Update", class: 'btn btn-primary'
+            .float-right
+              = link_to "Back", :back, class: 'btn btn-outline-primary'
+
+        %hr
+        .float-right
+          %p
+            = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
