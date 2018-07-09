@@ -1,0 +1,21 @@
+%table.table.table-hover
+  %thead.thead-dark
+    %tr
+      %th{:scope => "col"} Name
+      %th{:scope => "col"} Day of week
+      %th{:scope => "col"} Duration
+      %th{:scope => "col"}
+  %tbody
+    - @gym_classes.each do |gym_class|
+      %tr
+        %th= gym_class.name
+        %td= gym_class.day_of_week
+        %td= "#{convert_to_time(gym_class.start_at)} - #{convert_to_time(gym_class.end_at)}"
+        %td
+          - if gym_class.scheduler.nil?
+            %a{href: new_gym_class_scheduler_path(gym_class)} Create schedule
+          - else
+            = "Scheduled: #{schedule_to_s(gym_class&.scheduler)}"
+            %a{href: gym_class_scheduler_path(gym_class, gym_class.scheduler),
+               "data-method" => :delete,
+               data: {confirm: "Are you sure?"} } Delete schedule

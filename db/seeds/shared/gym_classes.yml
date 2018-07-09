@@ -1,0 +1,10 @@
+options:
+  find_existing_by: ['platform_id']
+
+records:
+  - sprig_id: 1
+    name: 'Bodypump'
+    platform_id: 74401
+    day_of_week: 'Tuesday'
+    start_at: '07:30'
+    end_at: '08:30'

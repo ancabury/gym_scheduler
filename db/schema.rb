@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_075907) do
+ActiveRecord::Schema.define(version: 2018_07_09_113014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gym_classes", force: :cascade do |t|
+    t.string "name"
+    t.string "day_of_week"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "platform_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedulers", force: :cascade do |t|
+    t.bigint "gym_class_id"
+    t.string "minute", default: "*"
+    t.string "hour", default: "*"
+    t.string "day_of_month", default: "*"
+    t.string "month", default: "*"
+    t.integer "day_of_week", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gym_class_id"], name: "index_schedulers_on_gym_class_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false

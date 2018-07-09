@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users
+  resources :gym_classes do
+    resources :scheduler, only: [:new, :create, :destroy]
+  end
+  resources :scheduler, only: :index
 end
