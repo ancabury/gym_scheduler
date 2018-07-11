@@ -3,8 +3,14 @@ options:
 
 records:
   - sprig_id: 1
-    name: 'Bodypump'
+    name: 'Bodypump 1'
     platform_id: 74401
     day_of_week: 'Tuesday'
     start_at: '07:30'
     end_at: '08:30'
+  - sprig_id: 2
+    name: 'Bodypump 2'
+    platform_id: 68456
+    day_of_week: 'Wednesday'
+    start_at: '18:00'
+    end_at: '19:00'

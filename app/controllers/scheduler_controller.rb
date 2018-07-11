@@ -10,6 +10,7 @@ class SchedulerController < ApplicationController
     @scheduler = Scheduler.new(scheduler_params.merge(gym_class: @gym_class))
     if @scheduler.valid?
       @scheduler.save!
+      AddCronJob.new(current_user.id, @scheduler).perform
       redirect_to root_path
     else
       render :new

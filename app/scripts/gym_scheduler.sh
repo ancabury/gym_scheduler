@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-email=""
-pass=""
+email="anca.sarbu93@gmail.com"
+pass="littleGeo24"
 
 #visit login page and get session
 login_page==$(curl -XGET https://cbcfitness.gymmasteronline.com/portal/)
