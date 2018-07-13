@@ -42,6 +42,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    aes (0.5.0)
     arel (9.0.0)
     autoprefixer-rails (8.6.5)
       execjs
@@ -70,6 +71,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-encryptable (0.2.0)
+      devise (>= 2.1.0)
     erubi (1.7.1)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -212,11 +215,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aes (~> 0.5.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.4, >= 4.4.3)
+  devise-encryptable (~> 0.2.0)
   haml-rails (~> 1.0)
   jbuilder (~> 2.5)
   jquery-rails

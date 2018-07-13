@@ -115,7 +115,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'cfb17bc2fcf150d86beac7882122474ec0b1bbe857721abdb42ee2b5f082bb039cadff8e751e70a59551a177af56966b7f1776a75a29de2ad06383ca61c24fca'
+  config.pepper = Rails.application.credentials.secret_key_base
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -224,7 +224,7 @@ Devise.setup do |config|
   # stretches to 10, and copy REST_AUTH_SITE_KEY to pepper).
   #
   # Require the `devise-encryptable` gem when using anything other than bcrypt
-  # config.encryptor = :sha512
+  config.encryptor = :aes256
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
