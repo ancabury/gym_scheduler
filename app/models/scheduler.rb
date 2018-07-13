@@ -7,4 +7,12 @@ class Scheduler < ApplicationRecord
   validates :month, cron: { inclusion: 0..12 }
 
   enum day_of_week: [:*, :mon, :tues, :wed, :thu, :fri, :sat, :sun]
+
+  def cron_time
+    "#{minute} #{hour} #{day_of_month} #{month} #{day_of_week}"
+  end
+
+  def cron_name
+    "#{gym_class.id}_#{gym_class.name.parameterize.underscore}"
+  end
 end

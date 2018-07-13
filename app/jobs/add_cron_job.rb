@@ -5,17 +5,13 @@ class AddCronJob < ApplicationJob
   end
 
   def perform
-    system "crontab -l ; echo \"#{cron_command_line}\" | crontab -"
+    system "(crontab -l ; echo \"#{cron_command_line}\") | crontab -"
   end
 
   private
 
   def cron_command_line
-    "#{crontab_execution_time} #{crontab_command} > #{crontab_log}"
-  end
-
-  def crontab_execution_time
-    "#{@scheduler.minute} #{@scheduler.hour} #{@scheduler.day_of_month} #{@scheduler.month} #{@scheduler.day_of_week}"
+    "#{@scheduler.cron_time} #{crontab_command} > #{crontab_log} # #{job_name}"
   end
 
   def crontab_command
@@ -28,5 +24,9 @@ class AddCronJob < ApplicationJob
 
   def crontab_log
     File.join(Dir.pwd, 'log', 'cron.log')
+  end
+
+  def job_name
+    @scheduler.cron_name
   end
 end

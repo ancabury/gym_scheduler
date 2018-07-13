@@ -18,6 +18,7 @@ class SchedulerController < ApplicationController
   end
 
   def destroy
+    DeleteCronJob.new(@scheduler).perform
     @scheduler.destroy
     redirect_to root_path
   end
