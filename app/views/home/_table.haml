@@ -12,12 +12,11 @@
         %td= gym_class.day_of_week
         %td= "#{convert_to_time(gym_class.start_at)} - #{convert_to_time(gym_class.end_at)}"
         %td
-          - if gym_class.scheduler.nil?
+          - scheduler = current_user.schedulers_for_gym_class(gym_class.id)
+          - if scheduler.nil?
             %a{href: new_gym_class_scheduler_path(gym_class)} Create schedule
           - else
-            - scheduler = current_user.schedulers_for_gym_class(gym_class.id)
-            - unless scheduler.nil?
-              = "Scheduled: #{schedule_to_s(scheduler)}"
-              %a{href: gym_class_scheduler_path(gym_class, scheduler),
-                 "data-method" => :delete,
-                 data: {confirm: "Are you sure?"} } Delete schedule
+            = "Scheduled: #{schedule_to_s(scheduler)}"
+            %a{href: gym_class_scheduler_path(gym_class, scheduler),
+               "data-method" => :delete,
+               data: {confirm: "Are you sure?"} } Delete schedule
