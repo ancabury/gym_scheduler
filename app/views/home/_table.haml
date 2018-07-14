@@ -15,7 +15,7 @@
           - if gym_class.scheduler.nil?
             %a{href: new_gym_class_scheduler_path(gym_class)} Create schedule
           - else
-            - scheduler = current_user.schedulers.for_gym_class(gym_class.id)
+            - scheduler = current_user.schedulers_for_gym_class(gym_class.id).first
             - unless scheduler.nil?
               = "Scheduled: #{schedule_to_s(scheduler)}"
               %a{href: gym_class_scheduler_path(gym_class, scheduler),
