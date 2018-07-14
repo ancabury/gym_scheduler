@@ -1,5 +1,8 @@
 class Scheduler < ApplicationRecord
   belongs_to :gym_class
+  has_one    :user
+
+  scope :for_gym_class, ->(id)  { find_by(gym_class_id: id) }
 
   validates :minute, cron: { inclusion: 0...60 }
   validates :hour, cron: { inclusion: 0...24 }
@@ -14,5 +17,9 @@ class Scheduler < ApplicationRecord
 
   def cron_name
     "#{gym_class.id}_#{gym_class.name.parameterize.underscore}"
+  end
+
+  def any_day_of_week?
+    day_of_week == '*'
   end
 end

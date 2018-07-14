@@ -15,7 +15,9 @@
           - if gym_class.scheduler.nil?
             %a{href: new_gym_class_scheduler_path(gym_class)} Create schedule
           - else
-            = "Scheduled: #{schedule_to_s(gym_class&.scheduler)}"
-            %a{href: gym_class_scheduler_path(gym_class, gym_class.scheduler),
-               "data-method" => :delete,
-               data: {confirm: "Are you sure?"} } Delete schedule
+            - scheduler = current_user.schedulers.for_gym_class(gym_class.id)
+            - unless scheduler.nil?
+              = "Scheduled: #{schedule_to_s(scheduler)}"
+              %a{href: gym_class_scheduler_path(gym_class, scheduler),
+                 "data-method" => :delete,
+                 data: {confirm: "Are you sure?"} } Delete schedule

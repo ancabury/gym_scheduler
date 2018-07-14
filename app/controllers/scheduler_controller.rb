@@ -7,10 +7,10 @@ class SchedulerController < ApplicationController
   end
 
   def create
-    @scheduler = Scheduler.new(scheduler_params.merge(gym_class: @gym_class))
+    @scheduler = Scheduler.new(scheduler_params.merge(gym_class: @gym_class, user_id: current_user.id))
     if @scheduler.valid?
       @scheduler.save!
-      AddCronJob.new(current_user.id, @scheduler).perform
+      # AddCronJob.new(current_user.id, @scheduler).perform
       redirect_to root_path
     else
       render :new
@@ -18,7 +18,7 @@ class SchedulerController < ApplicationController
   end
 
   def destroy
-    DeleteCronJob.new(@scheduler).perform
+    # DeleteCronJob.new(@scheduler).perform
     @scheduler.destroy
     redirect_to root_path
   end
