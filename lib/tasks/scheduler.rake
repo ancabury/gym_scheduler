@@ -4,6 +4,8 @@ task :create_booking => :environment do
     if schedule.any_day_of_week? || WEEK_DAYS[schedule.day_of_week.to_sym] == DateTime.now.wday
       user = schedule.user
       gym_class = schedule.gym_class
+
+      next if user.nil? || gym_class.nil?
       system("sh app/scripts/gym_scheduler.sh #{user.email} #{user.decoded_password } #{gym_class.platform_id}")
     end
   end

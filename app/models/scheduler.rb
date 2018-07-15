@@ -1,6 +1,6 @@
 class Scheduler < ApplicationRecord
   belongs_to :gym_class
-  has_one    :user
+  belongs_to    :user
 
   validates :minute, cron: { inclusion: 0...60 }
   validates :hour, cron: { inclusion: 0...24 }
