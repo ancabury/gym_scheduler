@@ -25,7 +25,7 @@ class UpdateGymClassesJob
       name: gym_class_attr[:bookingname],
       start_at: gym_class_attr[:start_str],
       end_at: gym_class_attr[:end_str],
-      day_of_week: gym_class_attr[:dayofweek].downcase
+      day_of_week: parse_day_of_week(gym_class_attr[:dayofweek].downcase)
     }
   end
 
