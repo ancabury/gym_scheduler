@@ -6,7 +6,9 @@ class UpdateGymClassesJob
 
   def perform
     @data.each do |gym_class_attributes|
-      gym_class = GymClass.find_or_initialize_by(platform_id: gym_class_attributes[:id])
+      gym_class = GymClass.find_or_initialize_by(
+        class_id: gym_class_attributes[:classid],
+        day_of_week: gym_class_attributes[:dayofweek].downcase)
       gym_class.update!(attributes_for(gym_class_attributes))
     end
 
@@ -23,7 +25,7 @@ class UpdateGymClassesJob
       name: gym_class_attr[:bookingname],
       start_at: gym_class_attr[:start_str],
       end_at: gym_class_attr[:end_str],
-      day_of_week: parse_day_of_week(gym_class_attr[:dayofweek].downcase)
+      day_of_week: gym_class_attr[:dayofweek].downcase
     }
   end
 

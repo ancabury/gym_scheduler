@@ -1,5 +1,5 @@
 options:
-  find_existing_by: ['platform_id']
+  find_existing_by: ['class_id', 'day_of_week']
 
 records:
   - sprig_id: 1
@@ -8,9 +8,11 @@ records:
     day_of_week: 'tuesday'
     start_at: '07:30'
     end_at: '08:30'
+    class_id: 4
   - sprig_id: 2
     name: 'Bodypump 2'
     platform_id: 68456
     day_of_week: 'wednesday'
     start_at: '18:00'
     end_at: '19:00'
+    class_id: 4

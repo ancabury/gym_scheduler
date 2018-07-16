@@ -7,6 +7,13 @@ task :create_booking => :environment do
 
       next if user.nil? || gym_class.nil?
       system("sh app/scripts/gym_scheduler.sh #{user.email} #{user.decoded_password } #{gym_class.platform_id}")
+
+      p '========================================='
+      p '========= Booking created for: =========='
+      p "scheduler: #{schedule}"
+      p "class: #{gym_class.name}"
+      p "user: #{user.name}"
+      p '========================================='
     end
   end
 end
