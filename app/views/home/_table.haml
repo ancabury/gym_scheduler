@@ -3,6 +3,7 @@
     %tr
       %th{:scope => "col"} Name
       %th{:scope => "col"} Day of week
+      %th{:scope => "col"} Trainer
       %th{:scope => "col"} Duration
       %th{:scope => "col"}
   %tbody
@@ -10,6 +11,7 @@
       %tr
         %th= gym_class.name
         %td= gym_class.day_of_week
+        %td= gym_class.trainer
         %td= "#{convert_to_time(gym_class.start_at)} - #{convert_to_time(gym_class.end_at)}"
         %td
           - scheduler = current_user.schedulers_for_gym_class(gym_class.id)
