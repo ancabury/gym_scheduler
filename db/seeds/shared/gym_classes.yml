@@ -5,12 +5,12 @@ records:
   - sprig_id: 1
     name: 'Bodypump 1'
     platform_id: 74401
-    day_of_week: 'Tuesday'
+    day_of_week: 'tuesday'
     start_at: '07:30'
     end_at: '08:30'
   - sprig_id: 2
     name: 'Bodypump 2'
     platform_id: 68456
-    day_of_week: 'Wednesday'
+    day_of_week: 'wednesday'
     start_at: '18:00'
     end_at: '19:00'

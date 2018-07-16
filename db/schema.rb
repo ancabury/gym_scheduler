@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_15_205233) do
+ActiveRecord::Schema.define(version: 2018_07_16_070036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "gym_classes", force: :cascade do |t|
     t.string "name"
-    t.string "day_of_week"
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer "platform_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "day_of_week"
   end
 
   create_table "schedulers", force: :cascade do |t|

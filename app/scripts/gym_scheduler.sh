@@ -10,7 +10,7 @@ login_page==$(curl -XGET https://cbcfitness.gymmasteronline.com/portal/)
 portal_login_url=$(echo $login_page | sed -e 's/.*<a href="\(.*\)">.*/\1/')
 
 # Login into the application
-login_response=$(curl -D -XPOST https://cbcfitness.gymmasteronline.com$portal_login_url \
+login_response=$(curl -XPOST https://cbcfitness.gymmasteronline.com$portal_login_url \
                       -d "email="$email"&password="$pass\
                       -H "Content-Type: application/x-www-form-urlencoded")
 

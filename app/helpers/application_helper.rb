@@ -1,5 +1,6 @@
 module ApplicationHelper
   def convert_to_time(date)
+    return '' if date.nil?
     date.strftime("%I:%M%p")
   end
 
