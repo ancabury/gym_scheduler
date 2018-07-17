@@ -33,4 +33,7 @@ echo
 booking_id=$(echo $response_location | sed -e 's/.*\/portal\/payment\/tacs\/\(.*\)?session.*/\1/')
 
 # booking confirmation
+echo
+echo https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
+echo
 curl -XPOST https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
