@@ -12,7 +12,7 @@ task :create_booking => :environment do
 
       p '========================================='
       p '========= Booking created for: =========='
-      p "scheduler: #{schedule}"
+      p "scheduler: #{schedule.to_s}"
       p "class: #{gym_class.name}"
       p "user: #{user.name}"
       p '========================================='
