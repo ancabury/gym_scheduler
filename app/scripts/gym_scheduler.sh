@@ -24,7 +24,8 @@ echo
 # Submit a class booking
 response_location=$(curl -i -XPOST "https://cbcfitness.gymmasteronline.com/portal/account/bookclass/submit?s=account.bookclass&session="$account_session\
                          -d "companyid="$company_id"&class="$class_id\
-                         -H "Content-Type: application/x-www-form-urlencoded")
+                         -H "Content-Type: application/x-www-form-urlencoded"\
+                          | grep "Location")
 echo
 echo $response_location
 echo
@@ -35,6 +36,7 @@ booking_id=$(echo $response_location | sed -e 's/.*\/portal\/payment\/tacs\/\(.*
 echo
 echo $booking_id
 echo
+
 echo
 echo https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
 echo
