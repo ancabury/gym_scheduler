@@ -3,6 +3,7 @@ task :create_booking => :environment do
   UpdateGymClassesJob.new.perform
 
   Scheduler.all.each do |schedule|
+    p " ================= #{Time.zone} ================"
     if schedule.any_day_of_week? || WEEK_DAYS[schedule.day_of_week.to_sym] == DateTime.now.wday
       user = schedule.user
       gym_class = schedule.gym_class
