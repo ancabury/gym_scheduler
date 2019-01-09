@@ -1,15 +1,21 @@
 class UpdateGymClassesJob
   def initialize
     @data = GetGymClasses.new.perform
-    @data = @data[:classes].map(&:with_indifferent_access)
   end
 
   def perform
-    @data.each do |gym_class_attributes|
-      gym_class = GymClass.find_or_initialize_by(
-        class_id: gym_class_attributes[:classid],
-        day_of_week: gym_class_attributes[:dayofweek].downcase)
-      gym_class.update!(attributes_for(gym_class_attributes))
+    @data = @data[:days].each do |_day, classes|
+      all_classes = classes['classes'].values.flatten
+      all_classes.each do |gym_class_attrs|
+        next if gym_class_attrs['name'] == 'filler'
+        next unless date_not_in_range(gym_class_attrs['date'])
+
+        gym_class = GymClass.find_or_initialize_by(
+          class_id: gym_class_attrs['id']
+        )
+
+        gym_class.update!(attributes_for(gym_class_attrs))
+      end
     end
 
     p '========================================='
@@ -20,17 +26,26 @@ class UpdateGymClassesJob
   private
 
   def attributes_for(gym_class_attr)
+    interval = gym_class_attr['interval'].gsub(/ /, '').split('-')
     {
-      platform_id: gym_class_attr[:id],
-      name: gym_class_attr[:bookingname],
-      start_at: gym_class_attr[:start_str],
-      end_at: gym_class_attr[:end_str],
-      day_of_week: parse_day_of_week(gym_class_attr[:dayofweek].downcase),
-      trainer:gym_class_attr[:staffname]
+      name: gym_class_attr['name'],
+      start_at: interval.first,
+      end_at: interval.last,
+      day_of_week: parse_day_of_week(gym_class_attr[:date]),
+      trainer: gym_class_attr[:trainer]
     }
   end
 
   def parse_day_of_week(data)
-    GymClass.day_of_weeks[data]
+    day = data.to_date.strftime("%A").downcase
+    GymClass.day_of_weeks[day]
+  end
+
+  def date_not_in_range(data)
+    date = data.to_date
+    week_start = Date.today.at_beginning_of_week
+    week_end = week_start + 6.days
+
+    week_start <= date && date <= week_end
   end
 end
