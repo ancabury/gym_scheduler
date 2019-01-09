@@ -1,39 +1,12 @@
 #!/usr/bin/env bash
 
-email=$1
-pass=$2
-class_id=$3
-company_id=2
+subscription_id=$1
+class_id=$2
 
-#visit login page and get session
-login_page==$(curl -XGET https://cbcfitness.gymmasteronline.com/portal/)
-portal_login_url=$(echo $login_page | sed -e 's/.*<a href="\(.*\)">.*/\1/')
+book_url='https://cbc.project-trancend.com/api/group_class/book'
+#todo X-Auth-Token needs generation ?
 
-# Login into the application
-login_response=$(curl -XPOST https://cbcfitness.gymmasteronline.com$portal_login_url \
-                      -d "email="$email"&password="$pass\
-                      -H 'Content-Type: application/x-www-form-urlencoded')
-
-echo "================= Login response ================="
-echo $login_response
-
-# get the session for the logged user
-account_session=$(echo $login_response | sed -e 's/.*<a href="\/portal\/account\/?session=\(.*\)">.*/\1/')
-
-# Submit a class booking
-response_location=$(curl -i -XPOST "https://cbcfitness.gymmasteronline.com/portal/account/bookclass/submit?s=account.bookclass&session="$account_session\
-                         -d 'bookingrequests=[{"bookingparentid":'$class_id'}]'\
-                         -H 'Content-Type: application/x-www-form-urlencoded'\
-                         | grep "Location")
-
-echo "================= Response location ================="
-echo $response_location
-
-# get booking id
-booking_id=$(echo $response_location | sed -e 's/.*\/portal\/payment\/tacs\/\(.*\)?session.*/\1/')
-
-echo "================= Booking id ================="
-echo $booking_id
-
-# booking confirmation
-curl -XPOST https://cbcfitness.gymmasteronline.com/portal/payment/complete/$booking_id?session=$account_session
+curl -i -XPOST 'https://cbc.project-trancend.com/api/group_class/book'\
+        -H 'X-Auth-Token: ae69f120-13de-11e9-9ecd-f17b2265e84b'\
+        -H 'Content-Type:  application/x-www-form-urlencoded; charset=UTF-8'\
+        --data "class_id="$class_id"&subscription_id="$subscription_id"&place=1"

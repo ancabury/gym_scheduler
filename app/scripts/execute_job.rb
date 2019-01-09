@@ -9,4 +9,4 @@ gym_class = GymClass.find_by id: gym_class_id
 
 return if user.nil? || gym_class.nil?
 
-system("sh app/scripts/gym_scheduler.sh #{user.email} #{user.decoded_password } #{gym_class.platform_id}")
+system("sh app/scripts/gym_scheduler.sh #{user.subscription_id} #{gym_class.class_id}")
