@@ -4,14 +4,15 @@ class UpdateGymClassesJob
   end
 
   def perform
-    @data = @data[:days].each do |_day, classes|
+    @data = @data[:days].each do |day, classes|
       all_classes = classes['classes'].values.flatten
       all_classes.each do |gym_class_attrs|
         next if gym_class_attrs['name'] == 'filler'
         next unless date_not_in_range(gym_class_attrs['date'])
 
         gym_class = GymClass.find_or_initialize_by(
-          class_id: gym_class_attrs['id']
+          name: gym_class_attrs['name'],
+          day_of_week: GymClass.day_of_weeks[day]
         )
 
         gym_class.update!(attributes_for(gym_class_attrs))
@@ -32,7 +33,8 @@ class UpdateGymClassesJob
       start_at: interval.first,
       end_at: interval.last,
       day_of_week: parse_day_of_week(gym_class_attr[:date]),
-      trainer: gym_class_attr[:trainer]
+      trainer: gym_class_attr[:trainer],
+      class_id: gym_class_attr[:id]
     }
   end
 
