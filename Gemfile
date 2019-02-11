@@ -22,6 +22,8 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'devise-encryptable', '~> 0.2.0'
 gem 'aes', '~> 0.5.0'
 
+gem 'rollbar'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
